@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
 import Intro from "../Intro/Intro.js";
+import Series from "../../containers/Series";
+import "whatwg-fetch";
 
 class App extends Component {
-  state = {
-    series: []
-  };
-
   render() {
     const element = (
       <div>
         <h1>Hello, world!</h1>
-        <h2>It is {new Date().toLocaleTimeString()}.</h2>
       </div>
     );
 
@@ -21,7 +18,8 @@ class App extends Component {
           <h1 className="App-title">Tv Series List</h1>
         </header>
         <Intro message="here you can find all of your most loved series" />
-        The length of series array - {this.state.series.length}
+
+        <Series />
       </div>
     );
   }
