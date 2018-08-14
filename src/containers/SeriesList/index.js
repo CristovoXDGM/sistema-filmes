@@ -1,14 +1,22 @@
 import React from "react";
-import Series from "../Series";
+import "../SeriesList/index.css";
+import { Link } from 'react-router-dom';
+
+const SeriesListItem = ({ series }) => (
+  <li>
+    <Link to={`/series/${series.show.id}`} >
+      {series.show.name}
+    </Link>
+  </li>
+
+);
 
 const SeriesList = props => {
   return (
-    <div>
-      <ul className="list-group">
+    <div className="series">
+      <ul className="list-group ">
         {props.list.map(series => (
-          <li key={series.show.id} className="list-group-item">
-            {series.show.name}
-          </li>
+          <SeriesListItem series={series} key={series.show.id} />
         ))}
       </ul>
     </div>

@@ -1,22 +1,63 @@
 import React, { Component } from "react";
 import SeriesLsit from "../../containers/SeriesList";
+import Loader from '../../Components/Loader';
+import Intro from '../../Components/Intro/Intro.js';
+
 
 class Series extends Component {
+
   state = {
-    series: []
-  };
-  componentDidMount() {
-    fetch("http://api.tvmaze.com/search/shows?q=Avengers")
-      .then(response => response.json())
-      .then(json => this.setState({ series: json }));
+    series: [],
+    seriesName: '',
+    isFetching: false
   }
+
+  onSeriesInputChange = e => {
+
+
+    this.setState({ seriesName: e.target.value, isFetching: true });
+
+    fetch(`http://api.tvmaze.com/search/shows?q=${e.target.value}`)
+      .then(response => response.json())
+      .then(json => this.setState({ series: json, isFetching: false }));
+
+  }
+
+
+
+
   render() {
+    const { series, seriesName, isFetching } = this.state;
+
     return (
       <div>
-        The length of series array - {this.state.series.length}
-        <SeriesLsit list={this.state.series} />
+        <Intro message="Aqui você encontra as Series Que você mais Ama" />
+        <div className="container">
+          <input
+            value={seriesName}
+            type="text"
+            onChange={this.onSeriesInputChange} />
+        </div>
+        {
+          series.length === 0 && seriesName.trim() == ''
+          &&
+          <p>Por favor digite o nome de alguma serie</p>
+        }
+        {
+          !isFetching && series.length === 0 && seriesName.trim() !== ''
+          &&
+          <p>Não foi possivel encontrar alguma serie com este nome</p>
+        }
+        {
+          isFetching && <Loader />
+        }
+        {
+          !isFetching && <SeriesLsit list={this.state.series} />
+        }
+
       </div>
-    );
+    )
+
   }
 }
 
