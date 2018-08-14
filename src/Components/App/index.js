@@ -8,14 +8,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Séries de Tv</h1>
-        </header>
+        <nav className="navbar navbar-light alert-success ">
 
+          <a className="navbar-brand " href="/">
+            Séries de Tv
+          </a>
+          <a className="navbar-brand " href="/">
+            Clique aqui para buscar uma nova Séries
+          </a>
+
+        </nav>
         <Main />
       </div>
     );
   }
+
+
 }
 
 export default App;

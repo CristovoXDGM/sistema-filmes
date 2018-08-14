@@ -11,6 +11,7 @@ class SingleSeries extends Component {
         fetch(`http://api.tvmaze.com/shows/${id}?embed=episodes`)
             .then(response => response.json())
             .then(json => this.setState({ show: json }));
+            
     }
 
     render() {
@@ -18,23 +19,33 @@ class SingleSeries extends Component {
         const { show } = this.state;
         console.log(show);
         return (
-            <div>
+            <div className="container">
                 {show === null && <Loader />}
                 {
                     show !== null
                     &&
-                    <div>
-                        <p>{show.name}</p>
-                        <p>Ano de estreia - {show.premiered}</p>
-                        <p>Notas - {show.rating.average}</p>
-                        <p>Gênero da serie: {show.genres}</p>
-                        <p>Quantidade de episodios {show._embedded.episodes.length}</p>
-                        <p>País - {show.network.country.name}</p>
-                        <p>
+                    <div className="row">
+                        <div className=" col-sm" >
+
+                            <h1 >Série:<br />{show.name}</h1>
+                        </div>
+                        <div className="img-thumbnail col-sm" >
+                            <br />
                             <img alt="Show" src={show.image.medium} />
-                        </p>
+                        </div>
+                        <div className=" col-sm">
+                            <div className="h2" >Ano de estreia :<br />{show.premiered}</div>
+                            <p className="h4">Notas - {show.rating.average}</p>
+                            <p className="h4">Gêneros da serie: {show.genres}</p>
+                            <p className="h4">Quantidade de episodios {show._embedded.episodes.length}</p>
+
+
+
+
+                        </div>
                     </div>
                 }
+
             </div>
         );
     }

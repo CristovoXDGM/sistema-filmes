@@ -30,8 +30,8 @@ class Series extends Component {
     const { series, seriesName, isFetching } = this.state;
 
     return (
-      <div>
-        <Intro message="Aqui você encontra as Series Que você mais Ama" />
+      <div className="card">
+        <Intro message="Ta precisando de alguma informação sobre alguma série? O seu lugar é aqui" />
         <div className="container">
           <input
             value={seriesName}

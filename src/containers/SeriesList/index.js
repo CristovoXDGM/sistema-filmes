@@ -13,8 +13,8 @@ const SeriesListItem = ({ series }) => (
 
 const SeriesList = props => {
   return (
-    <div className="series">
-      <ul className="list-group ">
+    <div >
+      <ul  >
         {props.list.map(series => (
           <SeriesListItem series={series} key={series.show.id} />
         ))}
